@@ -20,7 +20,7 @@ foreach (@filter) {
 		print OUT '>'."$_\n";
 	}
 	if ($_ =~ /(\d+)\t(\d+)/){
-	my $seqpart = substr($sequence, $1, $2);
+	my $seqpart = substr($sequence, $1, $2-$1);
 	print_sequence($seqpart, 80, *OUT);
 	}
 }
