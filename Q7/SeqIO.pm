@@ -11,9 +11,7 @@ use warnings;
 our $AUTOLOAD;
 use Carp;
 
-# Class data and methods
 {
-    # A list of all attributes with defaults and read/write/required/noinit properties
     my %_attribute_properties = (
         _filename    => [ '',        'read.write.required'],
         _filedata    => [ [ ],       'read.write.noinit'],
@@ -21,16 +19,13 @@ use Carp;
         _writemode   => [ '>',       'read.write.noinit'],
     );
         
-    # Global variable to keep count of existing objects
     my $_count = 0;
 
-    # Return a list of all attributes
-    sub _all_attributes {
+   sub _all_attributes {
             keys %_attribute_properties;
     }
 
-    # Check if a given property is set for a given attribute
-    sub _permissions {
+   sub _permissions {
         my($self, $attribute, $permissions) = @_;
         $_attribute_properties{$attribute}[1] =~ /$permissions/;
     }
@@ -199,8 +194,7 @@ sub AUTOLOAD {
     }
 }
 
-# When an object is no longer being used, this will be automatically called
-# and will adjust the count of existing objects
+
 sub DESTROY {
     my($self) = @_;
     $self->_decr_count(  );
